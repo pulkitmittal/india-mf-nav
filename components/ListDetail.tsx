@@ -8,9 +8,15 @@ type ListDetailProps = {
 const ListDetail = ({ item: mf }: ListDetailProps) => (
   <div>
     <h1>Detail for {mf.name}</h1>
-    <p>ID: {mf.id}</p>
-    <p>NAV: {mf.nav}</p>
-    <p>Date: {mf.date}</p>
+    <p>
+      ID: <span>{mf.id}</span>
+    </p>
+    <p>
+      NAV: <span>{mf.nav}</span>
+    </p>
+    <p>
+      Date: <span>{mf.date}</span>
+    </p>
   </div>
 );
 
