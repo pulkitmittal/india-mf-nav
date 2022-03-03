@@ -3,6 +3,7 @@ import Layout from '../../components/Layout';
 import ListDetail from '../../components/ListDetail';
 import { MF } from '../../interfaces';
 import { mfList } from '../../utils/sample-data';
+import { getBaseUrl } from '../../utils/util';
 
 type Props = {
   item?: MF;
@@ -14,8 +15,8 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   try {
     const { id } = context.query;
     // Fetch data from external API
-    const baseUrl = `${process.env.VERCEL_URL}`;
-    console.log(baseUrl);
+    const baseUrl = getBaseUrl();
+    console.log('baseUrl:', baseUrl);
     const res = await fetch(`${baseUrl}/api/mf/${id}`);
     const data = await res.json();
     const item = {
