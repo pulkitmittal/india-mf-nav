@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import React from 'react';
 import { MF } from '../interfaces';
 
@@ -7,8 +8,13 @@ type Props = {
 
 const TableRow = ({ data }: Props) => (
   <tr>
-    <td>{data.id}</td>
-    <td>{data.name}</td>
+    <td>
+      <Link href="/mf/[id]" as={`/mf/${data.id}`}>
+        <a>
+          {data.id}: {data.name}
+        </a>
+      </Link>
+    </td>
     <td>{data.nav}</td>
     <td>{data.date}</td>
   </tr>

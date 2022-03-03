@@ -3,6 +3,7 @@ import Layout from '../components/Layout';
 import Table from '../components/Table';
 import { MF } from '../interfaces';
 import { mfList } from '../utils/sample-data';
+import { getBaseUrl } from '../utils/util';
 
 type Props = {
   items?: MF[];
@@ -37,10 +38,12 @@ const Index = ({ items, errors }: Props) => (
 // // This gets called on every request
 export const getServerSideProps: GetServerSideProps = async () => {
   try {
+    const baseUrl = getBaseUrl();
+
     // Fetch data from external API
     const data = await Promise.all(
       mfList.map((mf) =>
-        fetch(`http://localhost:4000/api/mf/${mf.id}`)
+        fetch(`${baseUrl}/api/mf/${mf.id}`)
           .then((r) => r.json())
           .then((data) => ({
             ...mf,

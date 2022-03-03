@@ -8,6 +8,13 @@ type Props = {
 
 const Table = ({ items }: Props) => (
   <table>
+    <thead>
+      <tr>
+        <th>Fund</th>
+        <th>NAV</th>
+        <th>Date</th>
+      </tr>
+    </thead>
     <tbody>
       {items.map((item) => (
         <TableRow key={item.id} data={item} />
