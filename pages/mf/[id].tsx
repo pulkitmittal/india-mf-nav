@@ -14,7 +14,8 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   try {
     const { id } = context.query;
     // Fetch data from external API
-    const baseUrl = `${process.env.VERCEL_URL || 'http://localhost:4000'}`;
+    const baseUrl = `${process.env.VERCEL_URL}`;
+    console.log(baseUrl);
     const res = await fetch(`${baseUrl}/api/mf/${id}`);
     const data = await res.json();
     const item = {
@@ -39,8 +40,6 @@ export default function Page({ item, errors }: Props) {
       </Layout>
     );
   }
-
-  console.log(item);
 
   return (
     <Layout
