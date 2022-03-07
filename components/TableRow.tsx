@@ -4,9 +4,10 @@ import { MF } from '../interfaces';
 
 type Props = {
   data: MF;
+  timestamp: Date;
 };
 
-const TableRow = ({ data }: Props) => (
+const TableRow = ({ data, timestamp }: Props) => (
   <tr>
     <td>
       <Link href="/mf/[id]" as={`/mf/${data.id}`}>
@@ -17,6 +18,9 @@ const TableRow = ({ data }: Props) => (
     </td>
     <td>{data.nav}</td>
     <td>{data.date}</td>
+    <td>
+      <em>Response fetched at {new Date(timestamp).toString()}</em>
+    </td>
   </tr>
 );
 

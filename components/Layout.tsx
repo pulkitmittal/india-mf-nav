@@ -5,9 +5,10 @@ import React, { ReactNode } from 'react';
 type Props = {
   children?: ReactNode;
   title?: string;
+  showHomeLink?: boolean;
 };
 
-const Layout = ({ children, title = 'This is the default title' }: Props) => (
+const Layout = ({ children, title, showHomeLink }: Props) => (
   <div>
     <Head>
       <title>{title}</title>
@@ -15,11 +16,13 @@ const Layout = ({ children, title = 'This is the default title' }: Props) => (
       <meta name="viewport" content="initial-scale=1.0, width=device-width" />
     </Head>
     {children}
-    <p>
-      <Link href="/">
-        <a>Go home</a>
-      </Link>
-    </p>
+    {showHomeLink && (
+      <p>
+        <Link href="/">
+          <a>Go home</a>
+        </Link>
+      </p>
+    )}
   </div>
 );
 

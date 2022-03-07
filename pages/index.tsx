@@ -6,16 +6,16 @@ import { mfList } from '../utils/sample-data';
 import { getBaseUrl } from '../utils/util';
 
 type Props = {
-  items?: MF[];
+  items?: {
+    item: MF;
+    timestamp: Date;
+  }[];
   errors?: string;
 };
 
 const Index = ({ items, errors }: Props) => (
-  <Layout title="MF List | Next.js + TypeScript Example">
+  <Layout title="MF List | India Mutual Fund Nav" no-home-link>
     <h1>MF List</h1>
-    <p>
-      Example fetching data from inside <code>getServerSideProps()</code>.
-    </p>
     <p>You are currently on: /mf</p>
     {items ? (
       <Table items={items} />
@@ -45,13 +45,17 @@ export const getServerSideProps: GetServerSideProps = async () => {
       mfList.map((mf) =>
         fetch(`${baseUrl}/api/mf/${mf.id}`)
           .then((r) => r.json())
-          .then((data) => ({
-            ...mf,
-            ...data,
+          .then((response) => ({
+            item: {
+              ...mf,
+              ...response.value,
+            },
+            timestamp: response.timestamp,
           }))
       )
     );
-    // const data = await Promise.all(res.map((r) => r.json()));
+
+    console.log(data);
 
     // Pass data to the page via props
     return { props: { items: data } };

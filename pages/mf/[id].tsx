@@ -6,7 +6,10 @@ import { mfList } from '../../utils/sample-data';
 import { getBaseUrl } from '../../utils/util';
 
 type Props = {
-  item?: MF;
+  item?: {
+    value: MF;
+    timestamp: number;
+  };
   errors?: string;
 };
 
@@ -16,12 +19,14 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     const { id } = context.query;
     // Fetch data from external API
     const baseUrl = getBaseUrl();
-    console.log('baseUrl:', baseUrl);
     const res = await fetch(`${baseUrl}/api/mf/${id}`);
     const data = await res.json();
     const item = {
-      ...mfList.find((mf) => mf.id === Number(id)),
-      ...data,
+      value: {
+        ...mfList.find((mf) => mf.id === Number(id)),
+        ...data.value,
+      },
+      timestamp: data.timestamp,
     };
 
     // Pass data to the page via props
@@ -34,7 +39,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 export default function Page({ item, errors }: Props) {
   if (errors) {
     return (
-      <Layout title="Error | Next.js + TypeScript Example">
+      <Layout title="Error | India Mutual Fund Nav" showHomeLink>
         <p>
           <span style={{ color: 'red' }}>Error:</span> {errors}
         </p>
@@ -44,9 +49,10 @@ export default function Page({ item, errors }: Props) {
 
   return (
     <Layout
-      title={`${item ? item.name : 'MF Detail'} | Next.js + TypeScript Example`}
+      title={`${item ? item.value.name : 'MF Detail'} | India Mutual Fund Nav`}
+      showHomeLink
     >
-      {item && <ListDetail item={item} />}
+      {item && <ListDetail item={item.value} timestamp={item.timestamp} />}
     </Layout>
   );
 }

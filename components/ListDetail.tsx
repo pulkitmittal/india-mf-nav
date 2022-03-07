@@ -3,19 +3,23 @@ import { MF } from '../interfaces';
 
 type ListDetailProps = {
   item: MF;
+  timestamp: number;
 };
 
-const ListDetail = ({ item: mf }: ListDetailProps) => (
+const ListDetail = ({ item, timestamp }: ListDetailProps) => (
   <div>
-    <h1>Detail for {mf.name}</h1>
+    <h1>Detail for {item.name}</h1>
     <p>
-      ID: <span>{mf.id}</span>
+      ID: <span>{item.id}</span>
     </p>
     <p>
-      NAV: <span>{mf.nav}</span>
+      NAV: <span>{item.nav}</span>
     </p>
     <p>
-      Date: <span>{mf.date}</span>
+      Date: <span>{item.date}</span>
+    </p>
+    <p>
+      <em>Response fetched at {new Date(timestamp).toString()}</em>
     </p>
   </div>
 );
