@@ -6,7 +6,10 @@ const handler = async (_req: NextApiRequest, res: NextApiResponse) => {
   const response = await fetch(url);
   const { data, errors } = await response.json();
   if (data) {
-    res.setHeader('Cache-Control', 's-maxage=60, stale-while-revalidate=119');
+    res.setHeader(
+      'Cache-Control',
+      's-maxage=3600, stale-while-revalidate=3601'
+    );
     res.status(200).json({
       value: data[0],
       timestamp: Date.now(),
