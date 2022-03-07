@@ -19,7 +19,7 @@ const ListDetail = ({ item, timestamp }: ListDetailProps) => (
       Date: <span>{item.date}</span>
     </p>
     <p>
-      <em>Response fetched at {new Date(timestamp).toString()}</em>
+      <em>NAV data fetched at {new Date(timestamp).toISOString()}</em>
     </p>
   </div>
 );

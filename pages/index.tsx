@@ -55,8 +55,6 @@ export const getServerSideProps: GetServerSideProps = async () => {
       )
     );
 
-    console.log(data);
-
     // Pass data to the page via props
     return { props: { items: data } };
   } catch (error) {
